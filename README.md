@@ -1,2 +1,2 @@
 # TechBloom
-Techbloom by digital balika is here to help women to decide and follow journey in Tech. 
+An 8-day career launchpad for women switching to tech.
