@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechBloom | Digital Balika</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fff5f7; scroll-behavior: smooth; }
+        .serif { font-family: 'Playfair Display', serif; }
+        .glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px solid #fce7f3; }
+        
+        /* Interactive Hover Effects */
+        .hover-lift { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .hover-lift:hover { transform: translateY(-6px); box-shadow: 0 15px 30px -10px rgba(244, 114, 182, 0.3); }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade { animation: fadeIn 0.6s ease forwards; }
+        
+        .watermark { position: fixed; bottom: 20px; right: 20px; color: rgba(219, 39, 119, 0.1); font-size: 1.5rem; pointer-events: none; z-index: 50; }
+    </style>
+</head>
+<body class="text-gray-800 pb-20">
+
+    <div class="max-w-3xl mx-auto px-6 py-12">
+        
+        <header class="text-center mb-12">
+            <div class="mb-8 rounded-[3rem] p-8 bg-pink-100 border-4 border-white shadow-sm flex justify-center">
+                <svg width="300" height="200" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="60" cy="80" r="30" fill="#F472B6" opacity="0.6"/>
+                    <circle cx="140" cy="80" r="30" fill="#F472B6" opacity="0.6"/>
+                    <circle cx="100" cy="60" r="35" fill="#F472B6" opacity="0.8"/>
+                    <rect x="40" y="110" width="120" height="10" rx="5" fill="#FBCFE8"/>
+                    <path d="M80 130H120" stroke="#F472B6" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+            </div>
+            
+            <h1 class="serif text-5xl text-pink-600 mb-2">TechBloom</h1>
+            <p class="text-pink-400 font-medium italic">An initiative by Digital Balika</p>
+            
+            <div class="mt-6">
+                <span class="text-pink-500 font-semibold bg-pink-50 px-6 py-2 rounded-full text-sm border border-pink-100">
+                    ✨ You are not late. You are right on time.
+                </span>
+            </div>
+        </header>
+
+        <div class="glass rounded-3xl p-8 mb-8 border-2 border-pink-200 hover-lift">
+            <h2 class="text-xl font-bold text-pink-700 mb-4 italic">Is Tech Right For Me?</h2>
+            <div class="space-y-3 text-gray-600 text-sm">
+                <p class="flex items-center gap-2"><span>🌸</span> Do you enjoy solving small daily puzzles?</p>
+                <p class="flex items-center gap-2"><span>🌸</span> Are you curious about how websites are built?</p>
+                <p class="flex items-center gap-2"><span>🌸</span> Do you want a career that grows with you?</p>
+                <button onclick="document.getElementById('tech-confirm').classList.remove('hidden')" 
+                        class="mt-2 text-xs bg-pink-500 text-white px-5 py-2 rounded-full font-bold hover:bg-pink-600 transition shadow-md">
+                    Check Answer
+                </button>
+                <p id="tech-confirm" class="hidden text-pink-600 font-bold mt-3 p-3 bg-pink-50 rounded-xl">
+                    Yes, tech is for you. You don't need to be perfect. You just need to start!
+                </p>
+            </div>
+        </div>
+
+        <div class="glass rounded-3xl p-8 shadow-xl mb-12 hover-lift">
+            <h3 class="font-bold text-pink-700 mb-6 text-center">Customize Your Journey</h3>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-pink-900 mb-1">Current Field</label>
+                    <input id="currentField" type="text" placeholder="e.g. Teaching, Admin, Nursing" 
+                           class="w-full px-4 py-3 rounded-xl border border-pink-100 outline-none focus:ring-2 focus:ring-pink-300">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-pink-900 mb-1">Experience (Years)</label>
+                        <input id="years" type="number" placeholder="0" 
+                               class="w-full px-4 py-3 rounded-xl border border-pink-100 outline-none focus:ring-2 focus:ring-pink-300">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-pink-900 mb-1">Interest</label>
+                        <select id="interest" class="w-full px-4 py-3 rounded-xl border border-pink-100 outline-none focus:ring-2 focus:ring-pink-300 bg-white">
+                            <option value="notsure">🤔 Not Sure - Help Me Choose</option>
+                            <option value="frontend">🎨 Frontend (Web Design)</option>
+                            <option value="data">📊 Data Analyst (Trends)</option>
+                            <option value="qa">🔍 QA Testing (Quality)</option>
+                        </select>
+                    </div>
+                </div>
+                <button onclick="generateRoadmap()" 
+                        class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 text-lg">
+                    Generate My 8-Day Launchpad ✨
+                </button>
+            </div>
+        </div>
+
+        <div id="result" class="hidden space-y-6 animate-fade">
+            <div class="bg-gradient-to-br from-pink-400 to-rose-400 text-white p-6 rounded-3xl shadow-lg text-center">
+                <h4 class="font-bold text-xl mb-1" id="pathTitle">Your Journey</h4>
+                <p class="text-pink-50 text-sm italic mb-2" id="experienceShoutout"></p>
+                <p class="text-pink-50">Based on your background, you can learn tech basics in <strong>60–90 days</strong>.</p>
+            </div>
+
+            <div id="roadmapContainer" class="space-y-4"></div>
+
+            <div class="text-center py-6">
+                <button onclick="document.getElementById('confusedAdvice').classList.toggle('hidden')" 
+                        class="text-pink-600 underline font-medium hover:text-pink-800 transition">
+                    I’m still confused – help me decide
+                </button>
+                <div id="confusedAdvice" class="hidden mt-4 bg-white p-5 rounded-2xl border-2 border-dashed border-pink-200 text-pink-700 italic">
+                    "We suggest starting with <strong>QA Testing</strong> or <strong>Data roles</strong>. They are very beginner-friendly and value your eye for detail!"
+                </div>
+            </div>
+
+            <div class="p-8 bg-white border-2 border-pink-100 rounded-[2.5rem] shadow-sm text-center">
+                <h4 class="serif text-2xl text-pink-600 mb-3">About TechBloom</h4>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    TechBloom is a curated platform by <strong>Digital Balika</strong>. We help women pivot from traditional roles into tech by proving that their existing life skills—empathy, organization, and grit—are exactly what the industry needs.
+                </p>
+            </div>
+
+            <div class="p-6 bg-pink-600 text-white rounded-3xl text-center shadow-lg italic">
+                <p id="motivationalNote"></p>
+            </div>
+        </div>
+
+        <div class="mt-24">
+            <h3 class="serif text-3xl text-pink-700 mb-8 text-center">They Did It, So Can You</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover-lift">
+                    <p class="font-bold text-pink-600 text-lg">Sarah</p>
+                    <p class="text-[10px] text-pink-400 uppercase font-black mb-3">HR → Data Analyst</p>
+                    <p class="text-sm text-gray-600">"I used my communication skills to turn complex numbers into clear team insights."</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover-lift">
+                    <p class="font-bold text-pink-600 text-lg">Priya</p>
+                    <p class="text-[10px] text-pink-400 uppercase font-black mb-3">Homemaker → QA</p>
+                    <p class="text-sm text-gray-600">"My daily multi-tasking and organization made me the best Bug Hunter in my team."</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover-lift">
+                    <p class="font-bold text-pink-600 text-lg">Elena</p>
+                    <p class="text-[10px] text-pink-400 uppercase font-black mb-3">Sales → Frontend</p>
+                    <p class="text-sm text-gray-600">"I moved from selling products to building the beautiful websites that showcase them."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="watermark">Digital Balika</div>
+<footer class="mt-20 border-t border-pink-100 pt-10 text-center">
+        <div class="flex flex-col items-center gap-4">
+            <div class="text-xs text-gray-400 space-y-1">
+                <p>© 2025 <strong>Digital Balika</strong>. All Rights Reserved.</p>
+                <p>Designed to empower women in their journey to tech. ✨</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const roadmapData = {
+            notsure: {
+                title: "Top Booming Roles Discovery",
+                days: [
+                    { d: "Day 1: AI Revolution", res: "https://www.deeplearning.ai/ai-for-everyone/", quote: "AI is the fastest growing tech role today." },
+                    { d: "Day 2: Data Science Overview", res: "https://www.coursera.org/articles/what-is-data-science", quote: "Every company needs people to understand their numbers." },
+                    { d: "Day 3: Cybersecurity Basics", res: "https://www.comptia.org/content/articles/what-is-cybersecurity", quote: "Protecting the world online is a high-demand skill." },
+                    { d: "Day 4: UX/UI Design Intro", res: "https://www.interaction-design.org/literature/topics/ux-design", quote: "If you love empathy and design, this is for you." }
+                ]
+            },
+            frontend: {
+                title: "Frontend Developer Path",
+                days: [
+                    { d: "Day 1: What is Frontend?", res: "https://www.w3schools.com/whatis/whatis_frontenddev.asp", quote: "You are the artist of the web." },
+                    { d: "Day 2: HTML Structure", res: "https://www.w3schools.com/html/", quote: "Build the foundation of your first page." },
+                    { d: "Day 3: CSS Styling", res: "https://css-tricks.com", quote: "Add color and life to the internet." },
+                    { d: "Day 4: Flexbox Mastery", res: "https://flexboxfroggy.com/", quote: "Learn layout by playing a game!" }
+                ]
+            },
+            data: {
+                title: "Data Analyst Path",
+                days: [
+                    { d: "Day 1: Power of Excel", res: "https://www.excel-easy.com/", quote: "The foundation of all data work." },
+                    { d: "Day 2: Data Visualization", res: "https://www.tableau.com/learn/articles/data-visualization", quote: "Turn rows into beautiful stories." },
+                    { d: "Day 3: Intro to SQL", res: "https://sqlzoo.net/", quote: "Learn how to talk to databases." },
+                    { d: "Day 4: Statistics Basics", res: "https://www.khanacademy.org/math/statistics-probability", quote: "Numbers don't lie, but they do tell stories." }
+                ]
+            },
+            qa: {
+                title: "QA Engineer Path",
+                days: [
+                    { d: "Day 1: What is QA?", res: "https://www.istqb.org/", quote: "You are the guardian of software quality." },
+                    { d: "Day 2: Manual Testing", res: "https://www.guru99.com/manual-testing.html", quote: "Finding bugs is like a digital treasure hunt." },
+                    { d: "Day 3: Bug Reports", res: "https://www.atlassian.com/software/jira", quote: "Clear communication is your best tool." },
+                    { d: "Day 4: API Testing", res: "https://www.postman.com/", quote: "Test what's happening behind the scenes." }
+                ]
+            }
+        };
+
+        function generateRoadmap() {
+            const field = document.getElementById('currentField').value || "your current field";
+            const years = document.getElementById('years').value || "0";
+            const interest = document.getElementById('interest').value;
+            const container = document.getElementById('roadmapContainer');
+            const selected = roadmapData[interest];
+
+            // Logic for the personalized shoutout
+            let shoutout = `Wow! You've spent ${years} year(s) in ${field}. `;
+            if(parseInt(years) >= 3) {
+                shoutout += "That leadership experience is a tech superpower! 🚀";
+            } else if(parseInt(years) > 0) {
+                shoutout += "You've already proven you can master a profession. Tech is next! ✨";
+            } else {
+                shoutout = "A fresh start is the best start! Let's bloom. 🌸";
+            }
+
+            container.innerHTML = ''; 
+            document.getElementById('result').classList.remove('hidden');
+            document.getElementById('pathTitle').innerText = selected.title;
+            document.getElementById('experienceShoutout').innerText = shoutout;
+
+            selected.days.forEach(item => {
+                const div = document.createElement('div');
+                div.className = "bg-white p-5 rounded-2xl shadow-sm border-l-4 border-pink-400 hover-lift flex justify-between items-center gap-4 animate-fade";
+                div.innerHTML = `
+                    <div class="flex-1">
+                        <p class="text-xs font-bold text-pink-500 uppercase tracking-widest">${item.d.split(':')[0]}</p>
+                        <p class="font-bold text-gray-800 text-lg">${item.d.split(':')[1]}</p>
+                        <p class="text-xs text-gray-400 italic mt-1">"${item.quote}"</p>
+                    </div>
+                    <a href="${item.res}" target="_blank" class="text-xs font-bold bg-pink-50 text-pink-600 px-4 py-2 rounded-xl border border-pink-100 hover:bg-pink-500 hover:text-white transition-all whitespace-nowrap">Explore →</a>
+                `;
+                container.appendChild(div);
+            });
+
+            document.getElementById('motivationalNote').innerText = "Digital Balika: Every expert was once a beginner. You've got this!";
+            window.scrollTo({ top: document.getElementById('result').offsetTop - 30, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
