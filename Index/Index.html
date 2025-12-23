@@ -96,6 +96,7 @@
         <div id="result" class="hidden space-y-6 animate-fade">
             <div class="bg-gradient-to-br from-pink-400 to-rose-400 text-white p-6 rounded-3xl shadow-lg text-center">
                 <h4 class="font-bold text-xl mb-1" id="pathTitle">Your Journey</h4>
+                <p class="text-pink-50 text-sm italic mb-2" id="experienceShoutout"></p>
                 <p class="text-pink-50">Based on your background, you can learn tech basics in <strong>60–90 days</strong>.</p>
             </div>
 
@@ -146,7 +147,14 @@
     </div>
 
     <div class="watermark">Digital Balika</div>
-
+<footer class="mt-20 border-t border-pink-100 pt-10 text-center">
+        <div class="flex flex-col items-center gap-4">
+            <div class="text-xs text-gray-400 space-y-1">
+                <p>© 2025 <strong>Digital Balika</strong>. All Rights Reserved.</p>
+                <p>Designed to empower women in their journey to tech. ✨</p>
+            </div>
+        </div>
+    </footer>
     <script>
         const roadmapData = {
             notsure: {
@@ -188,13 +196,26 @@
         };
 
         function generateRoadmap() {
+            const field = document.getElementById('currentField').value || "your current field";
+            const years = document.getElementById('years').value || "0";
             const interest = document.getElementById('interest').value;
             const container = document.getElementById('roadmapContainer');
             const selected = roadmapData[interest];
 
+            // Logic for the personalized shoutout
+            let shoutout = `Wow! You've spent ${years} year(s) in ${field}. `;
+            if(parseInt(years) >= 3) {
+                shoutout += "That leadership experience is a tech superpower! 🚀";
+            } else if(parseInt(years) > 0) {
+                shoutout += "You've already proven you can master a profession. Tech is next! ✨";
+            } else {
+                shoutout = "A fresh start is the best start! Let's bloom. 🌸";
+            }
+
             container.innerHTML = ''; 
             document.getElementById('result').classList.remove('hidden');
             document.getElementById('pathTitle').innerText = selected.title;
+            document.getElementById('experienceShoutout').innerText = shoutout;
 
             selected.days.forEach(item => {
                 const div = document.createElement('div');
